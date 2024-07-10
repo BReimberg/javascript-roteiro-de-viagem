@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda</title>
+</head>
+<body>
+
+  <!-- Formulário -->
+  <form onsubmit="salvarAtividade(event)">
+    <!-- Campo para descrever a atividade -->
+    <div>
+      <input 
+        type="text" 
+        placeholder="Qual a atividade?"
+        name="atividade"
+        required
+      >
+    </div>
+    <!-- End Campo de atividade -->
+
+    <!-- Campo de data -->
+    <div>
+      <select name="dia">
+        <option value="2024-03-01">01 de Fevereiro</option>
+      </select>
+    </div>
+    <!-- End Campo de data -->
+
+    <!-- Campo de hora -->
+    <div>
+      <select name="hora">
+        <option value="10:30">10:30</option>
+      </select>
+    </div>
+    <!-- End Campo de hora -->
+
+    <!-- Botão para envio do formulário -->
+    <button>Salvar atividade</button>
+    <!-- End Button -->
+  </form>
+  <!-- End Formulário -->
+
+  <!-- Conteúdo do site -->
+  <main>
+    <h1>Atividades</h1>
+    <section></section>
+  </main>
+  <!-- End Conteúdo do site -->
+
+<!-- JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/pt-br.js"></script>
+  <script>dayjs.locale('pt-br')</script>
+
+</body>
+</html>
