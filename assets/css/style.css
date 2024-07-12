@@ -1,3 +1,4 @@
+/* Remove margens, preenchimentos, define o box-sizing e a fonte para todos os elementos */
 * {
   margin: 0;
   padding: 0;
@@ -5,13 +6,15 @@
   font-family: 'Inter', sans-serif;
 }
 
-html, input, select, button {
+/* Define o background e a cor de texto para elementos específicos */
+html, input, select, button, option {
   background-color: #09090B;
   color: #FAFAFA;
   letter-spacing: -0.02em;
   line-height: 120%;
 }
 
+/* Define estilos para o container principal do aplicativo */
 /* APP */
 #app {
   padding: 40px 20px;
@@ -20,7 +23,7 @@ html, input, select, button {
 }
 
 /* FORM */
-
+/* Estilos para o formulário */
 #place {
   display: flex;
   align-items: center;
@@ -32,20 +35,23 @@ html, input, select, button {
   margin-bottom: 32px;
 }
 
-/* remove estilos próprios do HMTL*/
+/* Remove todos os estilos próprios dos elementos input e select */
 input, select {
   all: unset;
 }
 
+/* Define a largura de 100% para elementos input, select, button e option */
 input, select, button, option {
   width: 100%;
 }
 
+/* Define layout de grid com gap para campos */
 .fields {
   display: grid;
   gap: 8px;
 }
 
+/* Estilos para o contêiner de campos */
 .field-wrapper {
   padding: 18px;
   background-color: #09090B;
@@ -62,6 +68,7 @@ input, select, button, option {
   outline: 2px solid yellowgreen;
 }
 
+/* Estilos para o botão */
 button {
   margin-top: 12px;
   border: none;
@@ -75,6 +82,7 @@ button {
   color: #132F00;
 }
 
+/* Estilos para o background do cartão */
 .card-bg {
   background: #18181B;
 
@@ -85,10 +93,12 @@ button {
 }
 
 /* MAIN */
+/* Estilos para o conteúdo principal */
 main {
   margin-top: 32px;
 }
 
+/* Estilos para o cabeçalho (h1) */
 h1 {
 font-weight: 600;
 font-size: 24px;
@@ -98,16 +108,19 @@ text-align: center;
 margin-bottom: 24px;
 }
 
+/* Define layout de grid para seções */
 section {
   display: grid;
   gap: 10px;
 }
 
+/* Esconde checkbox dentro da seção */
 section input[type="checkbox"] {
   position: absolute;
   inset: 0;
 }
 
+/* Estilos para o background do cartão dentro da seção */
 section .card-bg {
   position: relative;
   padding: 10px 16px;
@@ -130,23 +143,26 @@ section .card-bg .active {
   display: none;
 }
 
+/* Estilos para divs dentro do card-bg */
 section .card-bg > div {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
+/* Estilos para o elemento time */
 time {
   font-size: 14px;
   color: #A1A1AB;
   text-align: right;
 }
 
-/* sumir timer */
+/* Esconde o elemento time com a classe full */
 time.full {
   display: none;
 }
 
+/* Estilos para dispositivos com largura maior que 1024px */
 @media (width > 1024px) {
   #app {
     display: flex;
@@ -172,9 +188,11 @@ time.full {
   }
 }
 
+/* Animação para o aparecimento dos elementos card-bg */
 section .card-bg {
   animation: appear 300ms;
 }
+
 @keyframes appear {
   from {
     opacity: 0;

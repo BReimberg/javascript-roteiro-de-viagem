@@ -1,26 +1,32 @@
-//bibliotecas e códigos de terceiros
+// Importa biblioteca dayjs
 const formatador = (data) => {
   return {
+    // Formatar o dia em número
     dia: {
       numerico: dayjs(data).format('DD'),
+      // Formatar o dia da semana em forma curta e longa
       semana: {
         curto: dayjs(data).format('ddd'),
         longo: dayjs(data).format('dddd'),
       }
     },
+    // Formatar o mês
     mes: dayjs(data).format('MMMM'),
+    // Formatar a hora
     hora: dayjs(data).format('HH:mm')
   };
 };
+// End Import
 
-//Objeto
+// Objeto de atividade
 const atividade = {
   nome: "Almoço",
   data: new Date("2024-04-08 10:00"),
   finalizada: true
 };
+// End Objeto de atividade
 
-//Lista | Array | Vetor
+// Lista de atividades
 let atividades = [
   atividade,
   {
@@ -34,10 +40,11 @@ let atividades = [
     finalizada: true
   },
 ];
-//atividades = []
+// End Lista de atividades
 
-//Função | Arrow Function
+// Função para criar um item de atividade
 const criarItemDeAtividade = (atividade) => {
+  // Cria o input do checkbox para concluir atividade
   let input = `
     <input 
     onchange="concluirAtividade(event)"
@@ -45,14 +52,16 @@ const criarItemDeAtividade = (atividade) => {
     type="checkbox"
   `; 
 
+  // Marca o checkbox se a atividade estiver finalizada
   if (atividade.finalizada) {
     input += 'checked';
   }
 
   input += '>';
 
+  // Formata a data da atividade
   const formatar = formatador(atividade.data);
-
+  // Retorna o HTML do item de atividade
   return `
     <div class="card-bg">
       ${input}
@@ -83,9 +92,11 @@ const criarItemDeAtividade = (atividade) => {
     </div>
   `;
 };
+// End Função para criar um item de atividade
 
-//Estrutura de repetição
+// Função para atualizar a lista de atividades
 const atualizarListaDeAtividades = () => {
+  // Seleciona o elemento <section> no DOM
   const section = document.querySelector('section');
   section.innerHTML = '';
 
@@ -94,29 +105,35 @@ const atualizarListaDeAtividades = () => {
     section.innerHTML = `<p>Nenhuma atividade cadastrada.</p>`;
     return;
   }
-
+  // Itera sobre cada atividade e adiciona ao DOM
   for (let atividade of atividades) {
     section.innerHTML += criarItemDeAtividade(atividade);
   }
 };
+// End Função para atualizar a lista de atividades
 
+// Chama a função para atualizar a lista de atividades ao carregar a página
 atualizarListaDeAtividades();
 
+// Função para salvar uma nova atividade
 const salvarAtividade = (event) => {
   event.preventDefault();
   const dadosDoFormulario = new FormData(event.target);
 
+  // Obtém os valores do formulário
   const nome = dadosDoFormulario.get('atividade');
   const dia = dadosDoFormulario.get('dia');
   const hora = dadosDoFormulario.get('hora');
   const data = `${dia} ${hora}`;
 
+  // Cria um novo objeto de atividade
   const novaAtividade = {
     nome,
     data,
     finalizada: false
   };
 
+  // Verifica se já existe uma atividade na mesma data/hora
   const atividadeExiste = atividades.find((atividade) => {
     return atividade.data == novaAtividade.data;
   });
@@ -124,10 +141,13 @@ const salvarAtividade = (event) => {
     return alert('Dia/Hora não disponível');
   }
 
+  // Adiciona a nova atividade à lista e atualiza a lista de atividades
   atividades = [novaAtividade, ...atividades];
   atualizarListaDeAtividades();
 };
+// End Função para salvar uma nova atividade
 
+// Função para criar as opções de dias no formulário
 const criarDiasSelecao = () => {
   const dias = [
     "2024-02-28",
@@ -139,6 +159,7 @@ const criarDiasSelecao = () => {
 
   let diasSelecao = '';
 
+  // Itera sobre cada dia e cria a opção no formulário
   for (let dia of dias) {
     const formatar = formatador(dia);
     const diaFormatado = `
@@ -152,11 +173,16 @@ const criarDiasSelecao = () => {
   document.querySelector('select[name="dia"]')
     .innerHTML = diasSelecao;
 };
+// End Função para criar as opções de dias no formulário
+
+// Chama a função para criar as opções de dias
 criarDiasSelecao();
 
+// Função para criar as opções de horas no formulário
 const criarHorasSelecao = () => {
   let horasDisponiveis = '';
 
+  // Itera sobre cada hora do dia e cria a opção no formulário
   for (let i = 6; i < 23; i++) {
     const hora = String(i).padStart(2, '0');
     horasDisponiveis += `
@@ -170,12 +196,17 @@ const criarHorasSelecao = () => {
   document.querySelector('select[name="hora"]')
     .innerHTML = horasDisponiveis;
 };
+// End Função para criar as opções de horas no formulário
+
+// Chama a função para criar as opções de horas
 criarHorasSelecao();
 
+// Função para concluir uma atividade
 const concluirAtividade = (event) => {
   const input = event.target;
   const dataDesteInput = input.value;
 
+  // Encontra a atividade correspondente
   const atividade = atividades.find((atividade) => {
     return atividade.data == dataDesteInput;
   });
@@ -186,3 +217,4 @@ const concluirAtividade = (event) => {
 
   atividade.finalizada = !atividade.finalizada;
 };
+// End Função para concluir uma atividade
